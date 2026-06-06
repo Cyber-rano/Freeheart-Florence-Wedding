@@ -87,7 +87,7 @@ html,body{min-height:100%;background:#1a1a1a}
       <div class="orn">✦ ✦ ✦</div>
       <h1 class="cn">Freeheart <span class="amp">&amp;</span> Florence</h1>
       <p class="wd">8th August 2026</p>
-      <p class="wv">Enclave Garden, East Legon, Ghana</p>
+      <p class="wv">Little Acre Hotel, Aburi, Ghana</p>
       <div class="div"><div class="dl"></div><div class="dd"></div><div class="dl"></div></div>
 
       <div class="tabs">
@@ -131,7 +131,7 @@ html,body{min-height:100%;background:#1a1a1a}
       <div id="prog-view" class="view">
         <p class="st">Order of events</p>
         <div class="prog-item"><div class="prog-time">10:00 AM</div><div class="prog-dot"></div><div><div class="prog-title">Guest Arrival &amp; Welcome</div><div class="prog-sub">Refreshments at the lobby</div></div></div>
-        <div class="prog-item"><div class="prog-time">11:00 AM</div><div class="prog-dot"></div><div><div class="prog-title">Wedding Ceremony</div><div class="prog-sub">Main Hall — Enclave Garden</div></div></div>
+        <div class="prog-item"><div class="prog-time">11:00 AM</div><div class="prog-dot"></div><div><div class="prog-title">Wedding Ceremony</div><div class="prog-sub">Main Hall — Little Acre Hotel</div></div></div>
         <div class="prog-item"><div class="prog-time">12:30 PM</div><div class="prog-dot"></div><div><div class="prog-title">Cocktail Hour &amp; Photos</div><div class="prog-sub">Garden terrace</div></div></div>
         <div class="prog-item"><div class="prog-time">2:00 PM</div><div class="prog-dot"></div><div><div class="prog-title">Reception &amp; Lunch</div><div class="prog-sub">Ballroom — by table assignment</div></div></div>
         <div class="prog-item"><div class="prog-time">4:00 PM</div><div class="prog-dot"></div><div><div class="prog-title">Cake Cutting &amp; Toasts</div><div class="prog-sub">Family and friends speeches</div></div></div>
@@ -158,9 +158,9 @@ html,body{min-height:100%;background:#1a1a1a}
         <div class="div"><div class="dl"></div><div class="dd"></div><div class="dl"></div></div>
         <p class="st" style="margin-top:0.5rem">Venue directions</p>
         <div class="dir-box">
-          <div class="dir-title">Enclave Garden, East Legon</div>
-          <div class="dir-text">Located in the serene East Legon, approximately 10.5km from Accra city centre. Ample parking available on site.</div>
-          <button class="dir-btn" onclick="window.open('https://maps.google.com/?q=Enclave+Garden+East+Legon+Ghana','_blank')">Open in Google Maps</button>
+          <div class="dir-title">Little Acre Hotel, Aburi</div>
+          <div class="dir-text">Located in the serene Aburi hills, approximately 35km from Accra city centre. Take the Aburi road from Adenta and follow signs to Little Acre Hotel. Ample parking available on site.</div>
+          <button class="dir-btn" onclick="window.open('https://maps.google.com/?q=Little+Acre+Hotel+Aburi+Ghana','_blank')">Open in Google Maps</button>
         </div>
       </div>
 
@@ -245,4 +245,32 @@ function fs(){
     err.classList.remove('show');
   } else {
     res.classList.remove('show');
-    err.textContent = 'Name not fo
+    err.textContent = 'Sorry we cannot find your name. Please check your spelling or see usher for assistance.';
+    err.classList.add('show');
+  }
+}
+
+function clearR(){
+  document.getElementById('res').classList.remove('show');
+  document.getElementById('err').classList.remove('show');
+}
+
+function switchTab(tab, el){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(tab + '-view').classList.add('active');
+  if(tab === 'qr' && !window.qrGenerated){
+    new QRCode(document.getElementById('qrcode'), {
+      text: window.location.href,
+      width: 180, height: 180,
+      colorDark: '#2d2518', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    window.qrGenerated = true;
+  }
+
+}
+</Script>
+</body>
+</html>
