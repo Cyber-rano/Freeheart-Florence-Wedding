@@ -9,53 +9,96 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%;background:#1a1a1a}
-  .wedding-app{min-height:100vh;background:linear-gradient(135deg,#1a1a1a 0%,#2d2518 50%,#1a1a1a 100%);padding:2rem 1rem;font-family:'Montserrat',sans-serif;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  :focus-visible{outline:2px solid #c9a84c;outline-offset:2px}
+  .wedding-app{min-height:100vh;min-height:100dvh;background:linear-gradient(135deg,#1a1a1a 0%,#2d2518 50%,#1a1a1a 100%);padding:2rem 1rem;font-family:'Montserrat',sans-serif;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
   .wedding-app::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-  .card{background:rgba(255,248,230,0.97);border-radius:4px;width:100%;max-width:480px;border:1px solid #c9a84c;position:relative;box-shadow:0 0 0 6px rgba(201,168,76,0.15),0 20px 60px rgba(0,0,0,0.5)}
+  .card{background:rgba(255,248,230,0.97);border-radius:4px;width:100%;max-width:480px;border:1px solid #c9a84c;position:relative;box-shadow:0 0 0 6px rgba(201,168,76,0.15),0 20px 60px rgba(0,0,0,0.5);animation:card-in 0.7s cubic-bezier(.16,1,.3,1) both}
   .card::before,.card::after{content:'';position:absolute;left:12px;right:12px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent)}
   .card::before{top:10px}.card::after{bottom:10px}
   .card-inner{padding:2.5rem 2rem}
-  .ornament{text-align:center;color:#c9a84c;font-size:22px;letter-spacing:8px;margin-bottom:0.5rem}
-  .couple-names{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;text-align:center;color:#2d2518;line-height:1.2;margin-bottom:0.25rem}
+  .ornament{text-align:center;color:#c9a84c;font-size:22px;letter-spacing:8px;margin-bottom:0.5rem;animation:fade-up 0.6s ease both;animation-delay:.05s}
+  .couple-names{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;text-align:center;color:#2d2518;line-height:1.2;margin-bottom:0.25rem;animation:fade-up 0.6s ease both;animation-delay:.1s}
   .ampersand{font-style:italic;color:#c9a84c}
-  .wedding-date{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a7040;margin-bottom:0.25rem}
-  .venue{text-align:center;font-size:12px;color:#8a7040;font-style:italic;margin-bottom:1.5rem}
+  .wedding-date{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a7040;margin-bottom:0.25rem;animation:fade-up 0.6s ease both;animation-delay:.15s}
+  .venue{text-align:center;font-size:12px;color:#8a7040;font-style:italic;margin-bottom:1.5rem;animation:fade-up 0.6s ease both;animation-delay:.2s}
   .divider{display:flex;align-items:center;gap:12px;margin:1rem 0}
   .divider-line{flex:1;height:0.5px;background:#c9a84c;opacity:0.4}
   .divider-diamond{width:6px;height:6px;background:#c9a84c;transform:rotate(45deg);flex-shrink:0}
   .section-title{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a7040;margin-bottom:1rem}
-  .input-wrap{margin-bottom:1rem}
-  .input-wrap input{width:100%;padding:12px 14px;border:1px solid #c9a84c;border-radius:2px;background:rgba(255,248,230,0.5);font-family:'Montserrat',sans-serif;font-size:14px;color:#2d2518;outline:none;text-align:center;letter-spacing:1px}
+  .input-wrap{margin-bottom:1rem;position:relative}
+  .input-wrap input{width:100%;padding:13px 14px;border:1px solid #c9a84c;border-radius:2px;background:rgba(255,248,230,0.5);font-family:'Montserrat',sans-serif;font-size:15px;color:#2d2518;outline:none;text-align:center;letter-spacing:1px;transition:border-color .25s,background .25s,box-shadow .25s}
   .input-wrap input::placeholder{color:#c9a84c;opacity:0.6;font-style:italic}
-  .input-wrap input:focus{border-color:#8a5e00;background:rgba(255,248,230,0.8)}
-  .find-btn{width:100%;padding:12px;background:#2d2518;color:#c9a84c;border:1px solid #c9a84c;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+  .input-wrap input:focus{border-color:#8a5e00;background:rgba(255,248,230,0.8);box-shadow:0 0 0 3px rgba(201,168,76,0.18)}
+  .input-wrap input.shake{animation:shake 0.4s ease}
+  .find-btn{width:100%;padding:13px;background:#2d2518;color:#c9a84c;border:1px solid #c9a84c;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s,transform .15s;position:relative;min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px}
   .find-btn:hover{background:#c9a84c;color:#2d2518}
-  .result-box{display:none;margin-top:1.5rem;padding:1.5rem;background:rgba(201,168,76,0.08);border:1px solid #c9a84c;border-radius:2px;text-align:center}
-  .result-box.show{display:block}
+  .find-btn:active{transform:scale(0.98)}
+  .find-btn:disabled{cursor:default;opacity:0.85}
+  .find-btn .spinner{width:12px;height:12px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .6s linear infinite;display:none}
+  .find-btn.loading .spinner{display:inline-block}
+  .find-btn.loading .btn-label{opacity:0.7}
+  .result-box{max-height:0;opacity:0;overflow:hidden;margin-top:0;padding:0 1.5rem;background:rgba(201,168,76,0.08);border:1px solid transparent;border-radius:2px;text-align:center;transition:max-height .5s cubic-bezier(.16,1,.3,1),opacity .4s ease,margin-top .5s ease,padding .5s ease,border-color .5s ease}
+  .result-box.show{max-height:500px;opacity:1;margin-top:1.5rem;padding:1.5rem;border-color:#c9a84c}
   .result-greeting{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:#2d2518;margin-bottom:0.5rem}
   .result-seat{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a7040;margin-bottom:0.5rem}
   .seat-number{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:400;color:#2d2518;line-height:1}
   .seat-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;margin-top:0.25rem;margin-bottom:0.5rem}
   .table-info{font-size:12px;color:#8a7040;font-style:italic}
-  .error-msg{display:none;margin-top:0.75rem;font-size:12px;color:#8a5e00;font-style:italic;text-align:center;padding:10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:2px}
-  .error-msg.show{display:block}
+  .error-msg{max-height:0;opacity:0;overflow:hidden;margin-top:0;font-size:12px;color:#8a5e00;font-style:italic;text-align:center;padding:0 10px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3);border-radius:2px;transition:max-height .35s ease,opacity .3s ease,margin-top .35s ease,padding .35s ease}
+  .error-msg.show{max-height:200px;opacity:1;margin-top:0.75rem;padding:10px}
   .footer-note{text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a7040;margin-top:1.5rem}
-  .program-section{display:none;margin-top:1.5rem}
-  .program-section.show{display:block}
+  .program-section{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .6s cubic-bezier(.16,1,.3,1),opacity .5s ease,margin-top .5s ease}
+  .program-section.show{max-height:3000px;opacity:1;margin-top:1.5rem}
   .program-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid rgba(201,168,76,0.2)}
   .program-item:last-child{border-bottom:none}
   .program-time{font-size:10px;letter-spacing:1px;color:#c9a84c;text-transform:uppercase;min-width:52px;padding-top:2px;flex-shrink:0}
   .program-dot{width:6px;height:6px;background:#c9a84c;transform:rotate(45deg);flex-shrink:0;margin-top:5px}
   .program-event{font-size:13px;color:#2d2518;line-height:1.4}
   .program-note{font-size:11px;color:#8a7040;font-style:italic;margin-top:2px}
+  .journey-section{margin-top:1.5rem}
+  .journey-scroll{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding:4px 4px 12px;margin:0 -4px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  .journey-scroll::-webkit-scrollbar{height:4px}
+  .journey-scroll::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.4);border-radius:4px}
+  .journey-scroll::-webkit-scrollbar-track{background:transparent}
+  .journey-card{flex:0 0 auto;width:150px;scroll-snap-align:start}
+  .journey-photo{width:150px;height:190px;border-radius:2px;border:1px solid #c9a84c;background:linear-gradient(145deg,rgba(201,168,76,0.18),rgba(201,168,76,0.06));display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+  .journey-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .journey-photo img.broken{display:none}
+  .journey-photo .img-fallback{display:none;color:#8a5e00;text-align:center;padding:0 12px;font-size:10px;letter-spacing:1px;text-transform:uppercase;line-height:1.5}
+  .journey-photo .img-fallback.show{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%}
+  .journey-photo-placeholder{color:#c9a84c;text-align:center;padding:0 12px;font-size:10px;letter-spacing:1px;text-transform:uppercase;opacity:0.75;line-height:1.5}
+  .journey-photo-placeholder svg{width:28px;height:28px;margin-bottom:8px;opacity:0.8}
+  .journey-caption{margin-top:8px;text-align:center}
+  .journey-label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:#2d2518;line-height:1.3}
+  .journey-date{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8a7040;margin-top:2px}
+  .journey-hint{text-align:center;font-size:10px;color:#8a7040;font-style:italic;margin-top:0.25rem}
   .qr-section{text-align:center;padding-top:0.5rem}
   .qr-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a7040;margin-bottom:1rem}
-  .qr-wrap{display:inline-block;padding:12px;background:white;border:1px solid #c9a84c}
+  .qr-wrap{display:inline-block;padding:12px;background:white;border:1px solid #c9a84c;min-width:180px;min-height:180px}
+  .qr-wrap #qrcode{display:flex;align-items:center;justify-content:center;width:180px;height:180px}
   .qr-hint{font-size:10px;color:#8a7040;margin-top:0.75rem;font-style:italic}
-  .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:1.5rem}
-  .tab{padding:6px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border:1px solid #c9a84c;background:transparent;color:#8a7040;border-radius:2px;font-family:'Montserrat',sans-serif;transition:all 0.2s}
-  .tab.active{background:#2d2518;color:#c9a84c}
-  .view{display:none}.view.active{display:block}
+  .copy-link-btn{margin-top:1rem;padding:10px 18px;background:transparent;color:#8a7040;border:1px solid rgba(201,168,76,0.5);border-radius:2px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s;min-height:40px}
+  .copy-link-btn:hover{background:rgba(201,168,76,0.1);color:#2d2518;border-color:#c9a84c}
+  .copy-link-btn.copied{background:#2d2518;color:#c9a84c;border-color:#2d2518}
+  .tabs{display:flex;gap:4px;justify-content:center;margin-bottom:1.5rem;position:relative;background:rgba(201,168,76,0.08);border-radius:3px;padding:4px}
+  .tab{flex:1;padding:9px 12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border:none;background:transparent;color:#8a7040;border-radius:2px;font-family:'Montserrat',sans-serif;transition:color .25s;position:relative;z-index:1;min-height:38px}
+  .tab.active{color:#fff7e6}
+  .tab-bg{position:absolute;top:4px;left:4px;width:calc(50% - 6px);height:calc(100% - 8px);background:#2d2518;border-radius:2px;transition:transform .35s cubic-bezier(.65,0,.35,1);z-index:0}
+  .view{display:none}.view.active{display:block;animation:fade-up 0.35s ease both}
+  @keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes card-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}
+  }
+  @media (max-width:380px){
+    .card-inner{padding:2rem 1.25rem}
+    .couple-names{font-size:1.65rem}
+    .seat-number{font-size:2.8rem}
+    .ornament{letter-spacing:6px;font-size:18px}
+  }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
@@ -73,19 +116,23 @@
         <div class="divider-line"></div>
       </div>
 
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab('guest', this)">Find My Seat</button>
-        <button class="tab" onclick="switchTab('qr', this)">QR Code</button>
+      <div class="tabs" role="tablist">
+        <div class="tab-bg" id="tabBg"></div>
+        <button class="tab active" id="tabGuest" role="tab" aria-selected="true" aria-controls="guest-view" onclick="switchTab('guest', this)">Find My Seat</button>
+        <button class="tab" id="tabQr" role="tab" aria-selected="false" aria-controls="qr-view" onclick="switchTab('qr', this)">QR Code</button>
       </div>
 
-      <div id="guest-view" class="view active">
+      <div id="guest-view" class="view active" role="tabpanel">
         <p class="section-title">Welcome, dear guest</p>
         <div class="input-wrap">
-          <input type="text" id="guestName" placeholder="Enter your full name" oninput="clearResult()" onkeydown="if(event.key==='Enter')findSeat()"/>
+          <input type="text" id="guestName" placeholder="Enter your full name" autocomplete="name" autocapitalize="words" enterkeyhint="search" aria-label="Your full name" oninput="clearResult()" onkeydown="if(event.key==='Enter')findSeat()"/>
         </div>
-        <button class="find-btn" onclick="findSeat()">Find My Seat</button>
-        <div class="error-msg" id="errorMsg"></div>
-        <div class="result-box" id="resultBox">
+        <button class="find-btn" id="findBtn" onclick="findSeat()">
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-label">Find My Seat</span>
+        </button>
+        <div class="error-msg" id="errorMsg" role="alert"></div>
+        <div class="result-box" id="resultBox" role="status" aria-live="polite">
           <p class="result-greeting" id="resultGreeting"></p>
           <p class="result-seat">Your assigned seat</p>
           <p class="seat-number" id="seatNumber"></p>
@@ -151,10 +198,88 @@
             <div class="program-dot"></div>
             <div><div class="program-event">Feast and Festivities</div><div class="program-note">Celebration commences with food, drinks, and entertainment</div></div>
           </div>
+
+          <div class="divider" style="margin:1.2rem 0 1rem">
+            <div class="divider-line"></div>
+            <div class="divider-diamond"></div>
+            <div class="divider-line"></div>
+          </div>
+          <p class="section-title">Their love journey</p>
+          <div class="journey-section">
+            <div class="journey-scroll" id="journeyScroll">
+              <div class="journey-card">
+                <div class="journey-photo">
+                  <img src="how-met-met.jpg" alt="How We Met" onerror="this.classList.add('broken');this.nextElementSibling.classList.add('show')">
+                  <div class="img-fallback">Photo not found<br>check filename</div>
+                </div>
+                <div class="journey-caption">
+                  <div class="journey-label">How We Met</div>
+                  <div class="journey-date">2019</div>
+                </div>
+              </div>
+              <div class="journey-card">
+                <div class="journey-photo">
+                  <img src="first-date.jpg" alt="First Date" onerror="this.classList.add('broken');this.nextElementSibling.classList.add('show')">
+                  <div class="img-fallback">Photo not found<br>check filename</div>
+                </div>
+                <div class="journey-caption">
+                  <div class="journey-label">First Date</div>
+                  <div class="journey-date">2020</div>
+                </div>
+              </div>
+              <div class="journey-card">
+                <div class="journey-photo">
+                  <img src="growing-together.jpg" alt="Growing Together" onerror="this.classList.add('broken');this.nextElementSibling.classList.add('show')">
+                  <div class="img-fallback">Photo not found<br>check filename</div>
+                </div>
+                <div class="journey-caption">
+                  <div class="journey-label">Growing Together</div>
+                  <div class="journey-date">2022</div>
+                </div>
+              </div>
+              <div class="journey-card">
+                <div class="journey-photo">
+                  <div class="journey-photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5-3 3-2-2-7 6"/></svg>
+                    Photo coming soon
+                  </div>
+                </div>
+                <div class="journey-caption">
+                  <div class="journey-label">The Proposal</div>
+                  <div class="journey-date">2024</div>
+                </div>
+              </div>
+              <div class="journey-card">
+                <div class="journey-photo">
+                  <div class="journey-photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5-3 3-2-2-7 6"/></svg>
+                    Photo coming soon
+                  </div>
+                </div>
+                <div class="journey-caption">
+                  <div class="journey-label">Engagement Day</div>
+                  <div class="journey-date">2025</div>
+                </div>
+              </div>
+              <div class="journey-card">
+                <div class="journey-photo">
+                  <div class="journey-photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5-3 3-2-2-7 6"/></svg>
+                    Photo coming soon
+                  </div>
+                </div>
+                <div class="journey-caption">
+                  <div class="journey-label">Today</div>
+                  <div class="journey-date">2026</div>
+                </div>
+              </div>
+            </div>
+            <p class="journey-hint">Swipe to see more →</p>
+          </div>
         </div>
       </div>
 
-      <div id="qr-view" class="view">
+      <div id="qr-view" class="view" role="tabpanel">
        <!-- <p class="section-title">Share at the entrance</p> -->
         <div class="qr-section">
           <p class="qr-title">Scan to find your seat</p>
@@ -162,6 +287,7 @@
             <div class="qr-wrap"><div id="qrcode"></div></div>
           </div>
           <p class="qr-hint">Scan this code for your seating information</p>
+          <button class="copy-link-btn" id="copyLinkBtn" onclick="copyLink()">Copy Link Instead</button>
         </div>
       </div>
 
@@ -171,6 +297,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
+// ============================================================
+// LOVE JOURNEY PHOTOS — to add a real photo, find its journey-card
+// in the HTML above and replace the inner .journey-photo-placeholder
+// div with: <img src="your-photo-url-or-path.jpg" alt="Caption">
+// Keep the surrounding .journey-photo div and .journey-caption as is.
 // ============================================================
 // GUEST LIST — update this object with real guest names later
 // Format: "Full Name": { table: X, seat: Y }
@@ -337,30 +468,51 @@ const tableNames = {
 function normalize(s){ return s.toLowerCase().replace(/\s+/g,' ').trim(); }
 
 function findSeat(){
-  const name = document.getElementById('guestName').value.trim();
+  const nameInput = document.getElementById('guestName');
+  const name = nameInput.value.trim();
   const result = document.getElementById('resultBox');
   const error = document.getElementById('errorMsg');
+  const btn = document.getElementById('findBtn');
+
   if(!name){
-    error.textContent = 'Please enter your name.';
+    error.textContent = 'Please enter your name to continue.';
     error.classList.add('show');
+    result.classList.remove('show');
+    nameInput.classList.remove('shake');
+    requestAnimationFrame(() => nameInput.classList.add('shake'));
+    nameInput.focus();
     return;
   }
-  const key = normalize(name);
-  const found = Object.entries(guests).find(([k]) => normalize(k) === key);
-  if(found){
-    const {table, seat} = found[1];
-    document.getElementById('resultGreeting').textContent = 'Welcome, ' + found[0] + '!';
-    document.getElementById('seatNumber').textContent = 'Seat ' + seat;
-    document.getElementById('tableLabel').textContent = tableNames[table] || 'Table ' + table;
-    document.getElementById('tableInfo').textContent = 'Table ' + table + '  ·  Seat ' + seat + ' of 10';
-    result.classList.add('show');
-    error.classList.remove('show');
-    document.getElementById('programSection').classList.add('show');
-  } else {
-    result.classList.remove('show');
-    error.textContent = 'Sorry we cannot find your name. Please check the spelling or see the usher for assistance.';
-    error.classList.add('show');
-  }
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  setTimeout(() => {
+    const key = normalize(name);
+    const found = Object.entries(guests).find(([k]) => normalize(k) === key);
+
+    if(found){
+      const {table, seat} = found[1];
+      document.getElementById('resultGreeting').textContent = 'Welcome, ' + found[0] + '!';
+      document.getElementById('seatNumber').textContent = 'Seat ' + seat;
+      document.getElementById('tableLabel').textContent = tableNames[table] || 'Table ' + table;
+      document.getElementById('tableInfo').textContent = 'Table ' + table + '  ·  Seat ' + seat + ' of 10';
+      result.classList.add('show');
+      error.classList.remove('show');
+      document.getElementById('programSection').classList.add('show');
+      setTimeout(() => result.scrollIntoView({behavior:'smooth', block:'nearest'}), 150);
+    } else {
+      result.classList.remove('show');
+      document.getElementById('programSection').classList.remove('show');
+      error.textContent = 'We could not find that name on the guest list. Please check the spelling or see an usher for help.';
+      error.classList.add('show');
+      nameInput.classList.remove('shake');
+      requestAnimationFrame(() => nameInput.classList.add('shake'));
+    }
+
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }, 350);
 }
 
 function clearResult(){
@@ -370,10 +522,17 @@ function clearResult(){
 }
 
 function switchTab(tab, el){
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   el.classList.add('active');
+  el.setAttribute('aria-selected','true');
   document.getElementById(tab + '-view').classList.add('active');
+
+  const bg = document.getElementById('tabBg');
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const idx = tabs.indexOf(el);
+  bg.style.transform = 'translateX(' + (idx * 100) + '%)';
+
   if(tab === 'qr' && !window.qrGenerated){
     new QRCode(document.getElementById('qrcode'), {
       text: window.location.href,
@@ -384,6 +543,22 @@ function switchTab(tab, el){
     window.qrGenerated = true;
   }
 }
+
+function copyLink(){
+  const btn = document.getElementById('copyLinkBtn');
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    btn.textContent = 'Link Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Link Instead'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    btn.textContent = 'Press & Hold to Copy';
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const nameInput = document.getElementById('guestName');
+  if(nameInput && window.innerWidth > 600){ nameInput.focus(); }
+});
 </script>
 </body>
 </html> 
