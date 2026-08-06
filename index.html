@@ -72,6 +72,11 @@
   .journey-label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:#2d2518;line-height:1.3}
   .journey-date{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8a7040;margin-top:2px}
   .journey-hint{text-align:center;font-size:10px;color:#8a7040;font-style:italic;margin-top:0.25rem}
+  .album-note{text-align:center;font-size:12px;color:#8a7040;font-style:italic;margin-bottom:1rem}
+  .album-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#2d2518;color:#c9a84c;border:1px solid #c9a84c;border-radius:2px;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s,transform .15s;min-height:44px}
+  .album-btn:hover{background:#c9a84c;color:#2d2518}
+  .album-btn:active{transform:scale(0.98)}
+  .album-btn svg{flex-shrink:0;transition:stroke .25s}  
   .qr-section{text-align:center;padding-top:0.5rem}
   .qr-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8a7040;margin-bottom:1rem}
   .qr-wrap{display:inline-block;padding:12px;background:white;border:1px solid #c9a84c;min-width:180px;min-height:180px}
@@ -275,8 +280,20 @@
                 </div>
               </div>
             </div>
-            <p class="journey-hint">Swipe to see more →</p>
+           <p class="journey-hint">Swipe to see more →</p>
           </div>
+
+          <div class="divider" style="margin:1.5rem 0 1rem">
+            <div class="divider-line"></div>
+            <div class="divider-diamond"></div>
+            <div class="divider-line"></div>
+          </div>
+          <p class="section-title">Our photo album</p>
+          <p class="album-note">Browse all our wedding photos and memories</p>
+          <a class="album-btn" href="https://photos.app.goo.gl/gvHvE5JUE13LXg5d6" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            View Photo Album
+          </a>
         </div>
       </div>
 
