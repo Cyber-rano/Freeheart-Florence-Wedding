@@ -125,7 +125,7 @@
       <div id="guest-view" class="view active" role="tabpanel">
         <p class="section-title">Welcome, dear guest</p>
         <div class="input-wrap">
-          <input type="text" id="guestName" placeholder="Enter your full name" autocomplete="name" autocapitalize="words" enterkeyhint="search" aria-label="Your full name" oninput="clearResult()" onkeydown="if(event.key==='Enter')findSeat()"/>
+          <input type="text" id="guestName" placeholder="Enter your first or full name" autocomplete="name" autocapitalize="words" enterkeyhint="search" aria-label="Your full name" oninput="clearResult()" onkeydown="if(event.key==='Enter')findSeat()"/>
         </div>
         <button class="find-btn" id="findBtn" onclick="findSeat()">
           <span class="spinner" aria-hidden="true"></span>
@@ -542,7 +542,11 @@ function findSeat(){
 
   setTimeout(() => {
     const key = normalize(name);
-    const found = Object.entries(guests).find(([k]) => normalize(k) === key);
+    const found = Object.entries(guests).find(([k]) => {
+      const full = normalize(k);
+      const first = full.split(' ')[0];
+      return full === key || first === key;
+    });
 
     if(found){
       const {table, seat} = found[1];
